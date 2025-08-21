@@ -11,7 +11,7 @@ VIDEO_FILE = r"F:\03-Temp_Data\wuzile\06-sitp数据实验\01-datalake\01-insta�
 OUTPUT_DIR = Path(r"F:\03-Temp_Data\wuzile\06-sitp数据实验\01-datalake\03-同济大学导出结果\文远楼周边")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
-BASE_ALTITUDE  =  15.0    # 您从地图/DEM 查询到的地面海拔（米）
+BASE_ALTITUDE  =  15.0    # 从地图/DEM 查询到的地面海拔（米）
 CAMERA_HEIGHT  =   1.5    # 相机距地面的高度（米）
 MANUAL_ALTITUDE = BASE_ALTITUDE + CAMERA_HEIGHT
 

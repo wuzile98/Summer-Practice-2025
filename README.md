@@ -70,6 +70,14 @@ python --version
 
 如果能正确显示版本号，说明安装成功。
 
+5. 安装完成后在你的 Python 环境中安装这次课程所需第三方包：
+> 说明：`subprocess`、`datetime`、`fractions`、`pathlib` 都是 **Python 标准库**，**无需安装**；真正需要通过包管理器安装的是 `gpxpy` 和 `piexif`。
+
+```bash
+python -m pip install gpxpy piexif
+```
+
+
 ---
 
 ### Insta360 Studio 安装
@@ -143,88 +151,6 @@ AliceVision 是一个开源的 SfM/MVS 工具集，也可用于三维重建。
 
 ## 3. 全景相机视频采集
 
-### 前置准备
-
-* Insta360 One X 全景相机（建议型号x2以上，前文已经提到）
-* Insta360 Studio 软件（用于 MP4 导出）
-* 已安装并添加到系统环境变量 `PATH` 中的 FFmpeg
-* Meshroom 2021.1.0
-
----
-
-### 步骤 1：全景相机视频采集
-
-1. 使用 USB 数据线连接 Insta360 相机与电脑。
-2. 启动 **Insta360 Studio**，导入拍摄的原始视频文件。
-3. 在导出选项中选择**全景视频**，点击**导出**。
-
-> ![Insta360 视频导出示例](./images/视频转换.png)
-
----
-
-### 步骤 2：使用 FFmpeg 提取全景照片
-
-1. **下载 FFmpeg**
-
-   前往 [FFmpeg 官网](https://ffmpeg.org/download.html) 下载适合 Windows 系统的版本，推荐使用 **Windows builds by BtbN**。
-
-   ![FFmpeg 下载示例](./images/ffmpeg.png)
-
-2. **配置环境变量**
-
-   在 Windows 搜索栏中搜索 "环境变量"，点击**编辑系统环境变量**，将解压后的 FFmpeg 文件夹路径加入系统 `PATH`。
-
-   ![环境变量配置](./images/添加到PATH.png)
-
-3. **提取帧图片**
-
-   在终端（CMD 或 PowerShell）中执行以下命令，提取 JPG 图片帧：
-
-   ```bash
-   ffmpeg -i path/to/360_video.mp4 -vf fps=1 -qscale:v 1 path/to/output_folder/image_%04d.jpg
-   ```
-
-   > 参数说明：
-   >
-   > * `fps=1`：每秒提取一帧（推荐设置）。
-
-> **备注：** 以上步骤也可使用 Python 脚本批量调用。
-
----
-
-### 步骤 3：使用 AliceVision 拆分成 8 个方向图片
-
-**简介：** AliceVision 是 Meshroom 背后的三维重建引擎，提供了一些实用脚本，例如本指南用到的 `aliceVision_utils_split360Images`，用于将全景图拆分成不同方向的平面图。
-
-1. **下载 Meshroom**
-
-   前往 [Meshroom 下载页面](https://www.fosshub.com/Meshroom-old.html) 下载。
-
-   > **注意：请选择下载 Meshroom 2021.1.0 版本！**
-
-   ![Meshroom 下载示例](./images/meshroom.png)
-
-2. **执行拆分脚本**
-
-   在 PowerShell 中进入 AliceVision 安装目录，执行以下命令：
-
-   ```bash
-   aliceVision_utils_split360Images.exe \
-   -i path/to/input_360_image_folder \
-   -o path/to/output_2D_image_folder \
-   --equirectangularNbSplits 8 \
-   --equirectangularSplitResolution 1200
-   ```
-
-   > **说明：**
-   >
-   > * 请确保命令行当前目录为 AliceVision 安装根目录。
-   > * 输入输出目录需使用绝对路径。
-
----
-
-## 3. 全景相机视频采集
-
 ---
 
 ## 4. 全景相机数据导出
@@ -240,28 +166,51 @@ AliceVision 是一个开源的 SfM/MVS 工具集，也可用于三维重建。
 > 分辨率设置为 5760 × 2880
 > 编码格式设置为 H.265
 
-![Insta360 视频导出示例](./images/视频转换.png)
+3. 得到下一步需要的**全景视频.mp4文件**和拍摄视频时记录的**空间位置信息.gpx文件**
+
+以下是图文步骤：
+
+![Insta360 视频导出示例](./images/视频导出1.png)
+![Insta360 视频导出示例](./images/视频导出2.png)
+![Insta360 视频导出示例](./images/视频导出3.png)
+![Insta360 视频导出示例](./images/视频导出4.png)
 
 
 ---
 
 ## 5. 轨迹匹配&抽帧&EXIF写入
 ⭐**这一步是预实验步骤**
-1. 打开脚本
-2. 设置路径
-3. 运行脚本，得到带有exif写入的全景图片
+1. 打开脚本：
+打开这个repo中的 [scripts/](scripts/video2imgs.py) video2imgs.py 文件
+2. 修改对应的参数
+3. 运行脚本，得到带有exif写入的全景图片（在你之前软件安装的部分应该成功安装了所需要的FFmpeg和相关的Python Packages， 如果失败，请参考[Python 安装](#python-安装)或[FFmpeg 安装](#ffmpeg-安装)）
+
+以下是图文步骤：
+
+![Python脚本使用示例](./images/Python脚本1.png)
 
 ---
 
 ## 6. 三维成果重建
 ⭐**这一步是预实验步骤**
 1. 图片导入
-2. camera calibration
+2. 相机矫正
 3. 特征匹配
 4. 数据清洗
 5. 点云重建（三维重建）（深度图重建）
 
-此部分将在后续更新，敬请关注。
+以下是图文步骤 ：
+
+![三维重建示例](./images/建模1.png)
+![三维重建示例](./images/建模2.png)
+![三维重建示例](./images/建模3.png)
+![三维重建示例](./images/建模4.png)
+![三维重建示例](./images/建模5.png)
+![三维重建示例](./images/建模6.png)
+![三维重建示例](./images/建模7.png)
+![三维重建示例](./images/建模8.png)
+![三维重建示例](./images/建模9.png)
+![三维重建示例](./images/建模10.png)
 
 ---
 
