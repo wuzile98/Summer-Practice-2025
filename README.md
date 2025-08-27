@@ -122,9 +122,10 @@ Metashape 是用于三维重建的软件。
 
 1. 打开 [Agisoft Metashape 官方下载页面](https://www.agisoft.com/downloads/installer/)
    ![metashape下载](./images/metashape.png)
-2. 下载试用版安装程序
+   ![metashape下载](./images/metashape2.png)
+2. 下载专业版安装程序
 3. 按提示完成安装
-4. 启动后可直接试用
+4. 启动后可开启30天试用
 
 ---
 
