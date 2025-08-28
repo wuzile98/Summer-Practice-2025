@@ -14,6 +14,7 @@
 4. [全景相机的数据导出](#4-全景相机的数据导出)  
 5. [轨迹匹配&抽帧&EXIF写入](#5-轨迹匹配&抽帧&EXIF写入)  
 6. [三维成果重建](#6-三维成果重建)  
+7. [参考资料](#参考资料)  
 
 
 ---
@@ -96,7 +97,7 @@ Insta360 Studio 用于导出相机视频和对应的帧。
 
 FFmpeg 是一个开源的视频处理工具，用于视频转码、抽帧等。
 
-1. 前往 [FFmpeg 官网](https://ffmpeg.org/download.html) 下载适合 Windows 系统的版本，推荐使用 **Windows builds by BtbN**。
+1. 前往 [FFmpeg 官网](https://ffmpeg.org/download.html) 下载适合 Windows 系统的版本，推荐使用 **Windows builds from gyan.dev**。
    ![FFmpeg 下载示例1](./images/ffmpeg.png)
 
 2. 选择 **"release builds"** 中的 **"ffmpeg-release-essentials"** 下载。
@@ -151,6 +152,33 @@ AliceVision 是一个开源的 SfM/MVS 工具集，也可用于三维重建。
 ---
 
 ## 3. 全景相机视频采集
+⭐**这一步是预实验步骤**
+1. 准备一台insta360相机(x2以及以上型号)
+2. 在你的手机上下载 **insta360** APP
+3. 手机app连接相机，确保做好以下设置：
+> 录像模式
+> 分辨率为 5.7k 30fps
+> 右上角三个点点击后， GPS功能确保开启
+4. 将相机抬举到头顶前上方，开始录制。
+
+以下是图文步骤：
+
+<table>
+  <tr>
+    <td><img src="./images/recording1.jpg" width="400"></td>
+    <td><img src="./images/recording2.jpg" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="./images/recording3.jpg" width="400"></td>
+    <td><img src="./images/recording4.jpg" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="./images/recording5.jpg" width="400"></td>
+    <td><img src="./images/recording6.jpg" width="400"></td>
+  </tr>
+</table>
+
+![视频拍摄](./images/recording7.png)
 
 ---
 
@@ -192,7 +220,7 @@ AliceVision 是一个开源的 SfM/MVS 工具集，也可用于三维重建。
 
 ---
 
-## 6. 三维成果重建
+## 6.1. 三维成果重建
 ⭐**这一步是预实验步骤**
 1. 图片导入
 2. 相机矫正
@@ -212,6 +240,20 @@ AliceVision 是一个开源的 SfM/MVS 工具集，也可用于三维重建。
 ![三维重建示例](./images/建模8.png)
 ![三维重建示例](./images/建模9.png)
 ![三维重建示例](./images/建模10.png)
+
+## 6.2. 三维成果重建
+
+1. 图片导入
+2. 相机矫正
+3. 特征匹配
+4. 数据清洗
+5. 点云重建（三维重建）（深度图重建）
+
+以下是图文步骤 ：
+
+
+---
+## 参考资料：
 
 ---
 
