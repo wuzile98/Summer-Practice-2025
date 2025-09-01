@@ -258,6 +258,7 @@ AliceVision 是一个开源的 SfM/MVS 工具集，也可用于三维重建。
 ![三维重建示例](./images/建模8.png)
 ![三维重建示例](./images/建模9.png)
 ![三维重建示例](./images/建模10.png)
+![三维重建示例](./images/建模11.png)
 
 
 ---
